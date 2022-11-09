@@ -1,7 +1,10 @@
 
 using AutoMapper;
 using GeekShopping.ProductAPI.Config;
+using GeekShopping.ProductAPI.Data.ValueObjects;
+using GeekShopping.ProductAPI.Models;
 using GeekShopping.ProductAPI.Models.Context;
+using GeekShopping.ProductAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -10,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -25,8 +29,10 @@ builder.Services.AddDbContext<MySQLContext>(
     )
  );
 
-IMapper mapper = new MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
+MappingConfig mapper = new MappingConfig();
+IMapper mapperConfiguration = mapper.RegisterMaps().CreateMapper();
+
+builder.Services.AddSingleton(mapperConfiguration);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();

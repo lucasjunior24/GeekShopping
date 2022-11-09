@@ -4,9 +4,9 @@ using GeekShopping.ProductAPI.Models;
 
 namespace GeekShopping.ProductAPI.Config
 {
-    public class MappingConfig
+    public  class MappingConfig
     {
-        public static MapperConfiguration RegisterMaps()
+        public MapperConfiguration RegisterMaps()
         {
             var mapperConfig = new MapperConfiguration(config =>
             {
@@ -17,5 +17,5 @@ namespace GeekShopping.ProductAPI.Config
             return mapperConfig;
         }
 
-    }
+    };
 }
