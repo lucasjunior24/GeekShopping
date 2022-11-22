@@ -28,7 +28,7 @@ namespace GeekShopping.ProductAPI.Controllers
             return productVO == null ? NotFound() : Ok(productVO);
         }
         [HttpPost]
-        public async Task<ActionResult<ProductVO>> Create(ProductVO VO)
+        public async Task<ActionResult<ProductVO>> Create([FromBody] ProductVO VO)
         {
             if (VO == null) return NotFound();
 
@@ -37,7 +37,7 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProductVO>> Update(ProductVO VO)
+        public async Task<ActionResult<ProductVO>> Update([FromBody] ProductVO VO)
         {
             if (VO == null) return NotFound();
 
